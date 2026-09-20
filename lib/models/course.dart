@@ -6,6 +6,9 @@ class Course {
   final String day; // e.g. Mon, Tue
   final String startTime; // ISO or HH:mm
   final String endTime;
+  final String? location;
+  final String? notes;
+  final String? colorHex; // optional color in hex, e.g. #FF5722
 
   Course({
     required this.id,
@@ -13,6 +16,9 @@ class Course {
     required this.day,
     required this.startTime,
     required this.endTime,
+    this.location,
+    this.notes,
+    this.colorHex,
   });
 
   factory Course.fromJson(Map<String, dynamic> json) => Course(
@@ -21,6 +27,9 @@ class Course {
         day: json['day'] as String,
         startTime: json['startTime'] as String,
         endTime: json['endTime'] as String,
+        location: json['location'] as String?,
+        notes: json['notes'] as String?,
+        colorHex: json['colorHex'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +38,9 @@ class Course {
         'day': day,
         'startTime': startTime,
         'endTime': endTime,
+        'location': location,
+        'notes': notes,
+        'colorHex': colorHex,
       };
 
   static List<Course> listFromJson(String jsonString) {
