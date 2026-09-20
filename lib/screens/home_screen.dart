@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/course.dart';
 import '../widgets/course_tile.dart';
+import 'course_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<Course> courses;
@@ -105,32 +106,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: _visibleCourses.length,
                 itemBuilder: (context, index) {
                   final course = _visibleCourses[index];
-                  return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              color: course.colorHex != null && course.colorHex!.isNotEmpty
-                                  ? Color(int.parse('FF${course.colorHex!.replaceAll('#', '')}', radix: 16))
-                                  : Colors.indigo,
-                              borderRadius: BorderRadius.circular(999),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => CourseDetailScreen(course: course),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                color: course.colorHex != null && course.colorHex!.isNotEmpty
+                                    ? Color(int.parse('FF${course.colorHex!.replaceAll('#', '')}', radix: 16))
+                                    : Colors.indigo,
+                                borderRadius: BorderRadius.circular(999),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            course.title,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const SizedBox(height: 6),
-                          Text('${course.day} • ${course.startTime}'),
-                          const SizedBox(height: 4),
-                          Text(course.location ?? 'TBD'),
-                        ],
+                            const SizedBox(height: 12),
+                            Text(
+                              course.title,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(height: 6),
+                            Text('${course.day} • ${course.startTime}'),
+                            const SizedBox(height: 4),
+                            Text(course.location ?? 'TBD'),
+                          ],
+                        ),
                       ),
                     ),
                   );

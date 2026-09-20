@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/course.dart';
+import '../screens/course_detail_screen.dart';
 
 class CourseTile extends StatelessWidget {
   final Course course;
@@ -24,52 +25,61 @@ class CourseTile extends StatelessWidget {
     final color = _resolveColor();
     final textTheme = Theme.of(context).textTheme;
 
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              color.withValues(alpha: 0.22),
-              color.withValues(alpha: 0.08),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => CourseDetailScreen(course: course),
+          ),
+        );
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                color.withValues(alpha: 0.22),
+                color.withValues(alpha: 0.08),
+              ],
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 12,
+                height: 64,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(course.title, style: textTheme.titleLarge),
+                    const SizedBox(height: 6),
+                    Text(
+                      '${course.day} • ${course.startTime} - ${course.endTime}',
+                      style: textTheme.bodyMedium,
+                    ),
+                    if (course.location != null && course.location!.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Text(course.location!, style: textTheme.bodySmall),
+                    ],
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right_rounded, color: color),
             ],
           ),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 12,
-              height: 64,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(course.title, style: textTheme.titleLarge),
-                  const SizedBox(height: 6),
-                  Text(
-                    '${course.day} • ${course.startTime} - ${course.endTime}',
-                    style: textTheme.bodyMedium,
-                  ),
-                  if (course.location != null && course.location!.isNotEmpty) ...[
-                    const SizedBox(height: 4),
-                    Text(course.location!, style: textTheme.bodySmall),
-                  ],
-                ],
-              ),
-            ),
-            Icon(Icons.chevron_right_rounded, color: color),
-          ],
         ),
       ),
     );

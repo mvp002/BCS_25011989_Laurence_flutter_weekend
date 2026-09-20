@@ -92,4 +92,29 @@ void main() {
     expect(find.text('List'), findsOneWidget);
     expect(find.text('Grid'), findsOneWidget);
   });
+
+  testWidgets('tapping a course opens the detail screen with the passed course', (tester) async {
+    final course = Course(
+      id: '1',
+      title: 'Math 101',
+      day: 'Mon',
+      startTime: '09:00',
+      endTime: '10:30',
+      location: 'Room 101',
+      notes: 'Bring calculator',
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: HomeScreen(courses: [course]),
+      ),
+    );
+
+    await tester.tap(find.text('Math 101'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Course details'), findsOneWidget);
+    expect(find.text('Math 101'), findsWidgets);
+    expect(find.text('Room 101'), findsOneWidget);
+  });
 }
