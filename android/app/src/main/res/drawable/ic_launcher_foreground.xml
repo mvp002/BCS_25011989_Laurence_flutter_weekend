@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- white rounded rectangle representing a calendar -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M18,30 h72 a6,6 0 0 1 6,6 v36 a6,6 0 0 1 -6,6 h-72 a6,6 0 0 1 -6,-6 v-36 a6,6 0 0 1 6,-6 z" />
+
+    <!-- two small squares to represent class blocks -->
+    <path
+        android:fillColor="#5E35B1"
+        android:pathData="M30,42 h12 v12 h-12 z M66,42 h12 v12 h-12 z" />
+
+</vector>
