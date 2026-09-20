@@ -1,30 +1,95 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:weekly_class_schedule/main.dart';
+import 'package:weekly_class_schedule/models/course.dart';
+import 'package:weekly_class_schedule/screens/home_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('shows empty state when no courses are scheduled', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: HomeScreen(courses: []),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('No classes scheduled yet'), findsOneWidget);
+    expect(find.text('Add your first class to get started.'), findsOneWidget);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('shows course items in list view when courses exist', (tester) async {
+    final courses = [
+      Course(
+        id: '1',
+        title: 'Math 101',
+        day: 'Mon',
+        startTime: '09:00',
+        endTime: '10:30',
+        location: 'Room 101',
+      ),
+    ];
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: HomeScreen(courses: courses),
+      ),
+    );
+
+    expect(find.byType(ListView), findsOneWidget);
+    expect(find.text('Math 101'), findsOneWidget);
+    expect(find.text('Mon • 09:00 - 10:30'), findsOneWidget);
+  });
+
+  testWidgets('switches to grid view when toggled', (tester) async {
+    final courses = [
+      Course(
+        id: '1',
+        title: 'Math 101',
+        day: 'Mon',
+        startTime: '09:00',
+        endTime: '10:30',
+        location: 'Room 101',
+      ),
+      Course(
+        id: '2',
+        title: 'History 204',
+        day: 'Wed',
+        startTime: '13:00',
+        endTime: '14:30',
+        location: 'Room 201',
+      ),
+    ];
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: HomeScreen(courses: courses),
+      ),
+    );
+
+    await tester.tap(find.byKey(const Key('grid-view-toggle')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(GridView), findsOneWidget);
+    expect(find.byType(ListView), findsNothing);
+  });
+
+  testWidgets('shows bottom navigation with Home, List, and Grid tabs', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: HomeScreen(courses: [
+          Course(
+            id: '1',
+            title: 'Math 101',
+            day: 'Mon',
+            startTime: '09:00',
+            endTime: '10:30',
+            location: 'Room 101',
+          ),
+        ]),
+      ),
+    );
+
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('List'), findsOneWidget);
+    expect(find.text('Grid'), findsOneWidget);
   });
 }

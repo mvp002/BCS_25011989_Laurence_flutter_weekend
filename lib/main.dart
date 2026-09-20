@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'models/course.dart';
+import 'screens/home_screen.dart';
+
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -8,86 +11,45 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final demoCourses = [
+    Course(
+      id: '1',
+      title: 'Math 101',
+      day: 'Mon',
+      startTime: '09:00',
+      endTime: '10:30',
+      location: 'Room 101',
+      colorHex: '#5C6BC0',
+    ),
+    Course(
+      id: '2',
+      title: 'English Lit',
+      day: 'Tue',
+      startTime: '11:00',
+      endTime: '12:30',
+      location: 'Room 204',
+      colorHex: '#26A69A',
+    ),
+    Course(
+      id: '3',
+      title: 'Design Studio',
+      day: 'Thu',
+      startTime: '14:00',
+      endTime: '16:00',
+      location: 'Lab 5',
+      colorHex: '#FF8A65',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Weekly Class Schedule',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
-      home: const MyHomePage(title: 'Weekly Class Schedule'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  void _onAddPressed() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Add class — form not implemented yet')),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 140,
-              height: 140,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple, Colors.indigo],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 8,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.schedule,
-                  color: Colors.white,
-                  size: 72,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Weekly Class Schedule',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 8),
-            const Text('Plan your week — tap + to add a class'),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _onAddPressed,
-        tooltip: 'Add class',
-        child: const Icon(Icons.add),
-      ),
+      home: HomeScreen(courses: demoCourses),
     );
   }
 }
