@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # weekly_class_schedule
 
 A new Flutter project.
@@ -15,3 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# BCS_25011989_Laurence_flutter_weekend
+Weekend assignment
+>>>>>>> 78630bd4943e9b26257538e912eb213f223026cc
