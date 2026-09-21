@@ -1,22 +1,31 @@
 <<<<<<< HEAD
 # weekly_class_schedule
 
-A new Flutter project.
+A Flutter application for managing and displaying week class schedule, built as part of BCS/Mobile Application Development milestones 1-8 
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- View Weekly class schedulewith course details
+- Empty and populated list in state
+- state management via provider
+- Edit, add or delete classes
 
-A few resources to get you started if this is your first Flutter project:
+  ## Tech Stack
+  - Framework: Flutter(Dart)
+  - state management: provider
+  - Testing: BlueStacks
+    
+## project status
+milestone 1-6 are completed and functional. Development on M7 was blocked by unresolved application freeze. 
+PLEASE SEE REPORT FOR FULL DETAILS why milestone 8 was not reached
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Known Issues
+Application freezes once Bluestacks is launched under all tried means
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
+## Author
+LAURENCE LADU JACOB-25011989
+
+
 # BCS_25011989_Laurence_flutter_weekend
 Weekend assignment
 >>>>>>> 78630bd4943e9b26257538e912eb213f223026cc
