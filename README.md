@@ -14,6 +14,15 @@ A Flutter application for managing and displaying week class schedule, built as 
   - Framework: Flutter(Dart)
   - state management: provider
   - Testing: BlueStacks
+
+    ## project structure
+    lib/
+    |______main.dart #App entry point
+    | _______models/ #Data models eg course
+    | ________providers/
+    | ________widgets/
+    | __________course_tile.dart #reusable course
+    | _________ widget test.dart
     
 ## project status
 milestone 1-6 are completed and functional. Development on M7 was blocked by unresolved application freeze. 
